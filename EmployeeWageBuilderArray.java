@@ -1,10 +1,16 @@
 import java.util.Random;
 
-public class EmployeeWageBuilderArray{
+interface IEmployeeWage{
+	public void addCompanyEmpWage(String compName, int empRateHour, int numOfWorkingDays, int maxHoursPerMonth);
+	public void computeWage();
+}
+
+
+public class EmployeeWageBuilderArray implements IEmployeeWage{
         private int NoOfCompany=0;
         private CompanyEmpWage[] CompEmpWageArray = new CompanyEmpWage[5];
 
-        public void addCompEmpWage(String compName, int empRateHour, int numOfWorkingDays, int maxHoursPerMonth){
+        public void addCompanyEmpWage(String compName, int empRateHour, int numOfWorkingDays, int maxHoursPerMonth){
                 CompEmpWageArray[NoOfCompany]=new CompanyEmpWage(compName, empRateHour, numOfWorkingDays, maxHoursPerMonth);
                 NoOfCompany++;
         }
@@ -40,10 +46,11 @@ public class EmployeeWageBuilderArray{
                 return totalempHr*cmpEmpWage.empRateHour;
         }
 
+
         public static void main(String args[]){
                 EmployeeWageBuilderArray empArray = new EmployeeWageBuilderArray();
-                empArray.addCompEmpWage("JIO", 15,10,100);
-     				 empArray.addCompEmpWage("CTS", 20,10,100);
+                empArray.addCompanyEmpWage("JIO", 65,15,100);
+     				 empArray.addCompanyEmpWage("CTS", 50,35,90);
                 empArray.computeWage();
         }
 }
