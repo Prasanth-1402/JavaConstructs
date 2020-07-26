@@ -3,15 +3,18 @@ import java.util.*;
 interface IEmployeeWage{
 	public void addCompanyEmpWage(String compName, int empRateHour, int numOfWorkingDays, int maxHoursPerMonth);
 	public void computeWage();
+	public int getTotalWage(String CompName);
 }
 
 
 public class EmployeeWageBuilderArray implements IEmployeeWage{
 			 private ArrayList<CompanyEmpWage> CompanyEmpWageArrayList = new ArrayList<>();
-
-          public void addCompanyEmpWage(String compName, int empRateHour, int numOfWorkingDays, int maxHoursPerMonth){
+			 private Map<String, CompanyEmpWage> EmpWageFromCompany  = new HashMap<>(); 
+          
+			public void addCompanyEmpWage(String compName, int empRateHour, int numOfWorkingDays, int maxHoursPerMonth){
                	CompanyEmpWage companyEmpWage =new CompanyEmpWage(compName, empRateHour, numOfWorkingDays, maxHoursPerMonth);
 						CompanyEmpWageArrayList.add(companyEmpWage);			
+						EmpWageFromCompany.put(compName, companyEmpWage);
         }
 
         public void computeWage(){
@@ -52,10 +55,17 @@ public class EmployeeWageBuilderArray implements IEmployeeWage{
         System.out.println(dailyWage);
         return totalempHr*cmpEmpWage.empRateHour;
 		}
+
+		public int getTotalWage(String CompanyName){
+			return EmpWageFromCompany.get(CompanyName).totalEmpWage;
+	
+		}
         public static void main(String args[]){
                 EmployeeWageBuilderArray empArray = new EmployeeWageBuilderArray();
                 empArray.addCompanyEmpWage("JIO", 65,15,100);
      				 empArray.addCompanyEmpWage("CTS", 50,35,90);
                 empArray.computeWage();
+					 System.out.println(empArray.getTotalWage("JIO"));
+					 System.out.println(empArray.getTotalWage("CTS"));
         }
 }
