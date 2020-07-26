@@ -1,5 +1,5 @@
-import java.util.Random;
-
+import java.util.*;
+			
 interface IEmployeeWage{
 	public void addCompanyEmpWage(String compName, int empRateHour, int numOfWorkingDays, int maxHoursPerMonth);
 	public void computeWage();
@@ -7,21 +7,20 @@ interface IEmployeeWage{
 
 
 public class EmployeeWageBuilderArray implements IEmployeeWage{
-        private int NoOfCompany=0;
-        private CompanyEmpWage[] CompEmpWageArray = new CompanyEmpWage[5];
+			 private ArrayList<CompanyEmpWage> CompanyEmpWageArrayList = new ArrayList<>();
 
-        public void addCompanyEmpWage(String compName, int empRateHour, int numOfWorkingDays, int maxHoursPerMonth){
-                CompEmpWageArray[NoOfCompany]=new CompanyEmpWage(compName, empRateHour, numOfWorkingDays, maxHoursPerMonth);
-                NoOfCompany++;
+          public void addCompanyEmpWage(String compName, int empRateHour, int numOfWorkingDays, int maxHoursPerMonth){
+               	CompanyEmpWage companyEmpWage =new CompanyEmpWage(compName, empRateHour, numOfWorkingDays, maxHoursPerMonth);
+						CompanyEmpWageArrayList.add(companyEmpWage);			
         }
 
         public void computeWage(){
                 int totalWage=0;
-                for(int i=0;i<NoOfCompany;i++){
-                        CompEmpWageArray[i].setEmpWage(this.computeWage(CompEmpWageArray[i]));
-                        System.out.println(CompEmpWageArray[i]);
-                        }
-
+                for(CompanyEmpWage i : CompanyEmpWageArrayList){
+								CompanyEmpWage companyEmpWage = i;
+                        companyEmpWage.setEmpWage(this.computeWage(companyEmpWage));
+								System.out.println(companyEmpWage);
+					 }
         }
 
         public int computeWage(CompanyEmpWage cmpEmpWage){
@@ -36,8 +35,8 @@ public class EmployeeWageBuilderArray implements IEmployeeWage{
                                                 break;
                                 case 2:
                                                 empHr=8;
-                  totalWorkingHrs+=8;
-                                                break;
+										                  totalWorkingHrs+=8;
+																break;
                                 default:
                                                 empHr=0;
                         }
