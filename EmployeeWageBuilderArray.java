@@ -11,18 +11,18 @@ public class EmployeeWageBuilderArray implements IEmployeeWage{
 			 private ArrayList<CompanyEmpWage> CompanyEmpWageArrayList = new ArrayList<>();
 			 private Map<String, CompanyEmpWage> EmpWageFromCompany  = new HashMap<>(); 
           
-			public void addCompanyEmpWage(String compName, int empRateHour, int numOfWorkingDays, int maxHoursPerMonth){
+	public void addCompanyEmpWage(String compName, int empRateHour, int numOfWorkingDays, int maxHoursPerMonth){
                	CompanyEmpWage companyEmpWage =new CompanyEmpWage(compName, empRateHour, numOfWorkingDays, maxHoursPerMonth);
-						CompanyEmpWageArrayList.add(companyEmpWage);			
-						EmpWageFromCompany.put(compName, companyEmpWage);
+		CompanyEmpWageArrayList.add(companyEmpWage);			
+		EmpWageFromCompany.put(compName, companyEmpWage);
         }
 
         public void computeWage(){
                 int totalWage=0;
                 for(CompanyEmpWage i : CompanyEmpWageArrayList){
-								CompanyEmpWage companyEmpWage = i;
+			CompanyEmpWage companyEmpWage = i;
                         companyEmpWage.setEmpWage(this.computeWage(companyEmpWage));
-								System.out.println(companyEmpWage);
+			System.out.println(companyEmpWage);
 					 }
         }
 
